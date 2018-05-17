@@ -30,7 +30,7 @@ app.post('/query', (req, res) => {
 });
 
 // fulfillment post from dialogFlow
-app.post('/fulfillment', (req, res) => {
+app.post('/action', (req, res) => {
     // receive query from dialogFlow for fulfillment
     // return data to dialogFlow
     res.send('Asked to get weather data');
@@ -39,3 +39,5 @@ app.post('/fulfillment', (req, res) => {
 app.listen(port, () => {
     console.log(`Server started on ${port}...`);
 });
+
+module.exports.app = app;

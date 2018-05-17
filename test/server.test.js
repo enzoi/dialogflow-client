@@ -1,9 +1,18 @@
-const mongoose = require('mongoose');
+const request = require('supertest');
 
-mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost/users_test');
-mongoose.connection
-    .once('open', () => console.log('Good to go'))
-    .on('error', (error) => {
-        console.warn('Warning', error);
+var app = require('../server').app;
+
+describe('Server', () => {
+    describe('GET /', () => {
+        it('should return welcome response', (done) => {
+            request(app)
+                .get('/')
+                .expect(200)
+                .expect('Welcome to my website')
+                .end(done);
+        });
     });
+});
+
+
+
