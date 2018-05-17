@@ -1,4 +1,7 @@
 const express = require('express');
+const { mongoose } = require('./db/mongoose');
+const {User} = require('./models/user');
+const {Message} = require('./models/message');
 const fs = require('fs');
 
 const port = process.env.PORT || 3000;
@@ -21,15 +24,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to my website');
 });
 
-// message from iOS
-app.post('/query', (req, res) => {
-    // relay query to dialogFlow
-
-    // relay response from dialogFlow to iOS client
-    res.send('query from user');
-});
-
-// fulfillment post from dialogFlow
+// fulfillment webhook from dialogFlow
 app.post('/action', (req, res) => {
     // receive query from dialogFlow for fulfillment
     // return data to dialogFlow
