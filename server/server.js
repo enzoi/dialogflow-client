@@ -34,10 +34,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/users', (req, res) => {
-    const body = _.pick(req.body, ['email', 'password']);
-    const user = new User(body);
+    var body = _.pick(req.body, ['email', 'password']);
+    var user = new User(body);
+
     user.save().then((user) => {
-        res.send(user);
+        return user.generateAuthToken();
+        // res.send(user);
+    }).then((token) => {
+        res.header('x-auth', token).send(user);
     }).catch((e) => {
         res.status(400).send(e);
     })

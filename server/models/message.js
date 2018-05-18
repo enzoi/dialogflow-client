@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-var messageSchema = Schema({
-    author: { type: Schema.Types.ObjectId, ref: 'User' },
+var messageSchema = new mongoose.Schema({
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     text: { 
         type: String,
         required: true,
