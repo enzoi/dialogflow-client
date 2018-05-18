@@ -1,13 +1,16 @@
 const expect = require('expect');
 const request = require('supertest');
+const {ObjectID} = require('mongodb');
 
 const {app} = require('../server');
 const {Message} = require('../models/message');
 
 const messages = [{
+    _id: new ObjectID(),
     text: 'First test message',
     isSender: true
 }, {
+    _id: new ObjectID(),
     text: 'Second test message',
     isSender: false
 }]
@@ -81,6 +84,34 @@ describe('Server', () => {
                 .expect((res) => {
                     expect(res.body.messages.length).toBe(2);
                 })
+                .end(done);
+        });
+    });
+
+    describe('GET /messages/:id', () => {
+        it('should get specific message by id', (done) => {
+            request(app)
+                .get(`/messages/${messages[0]._id.toHexString()}`)
+                .expect(200)
+                .expect((res) => {
+                    expect(res.body.message.text).toBe(messages[0].text);
+                })
+                .end(done);
+        });
+
+        it('should return 404 if message not found', (done) => {
+            const hexId = new ObjectID().toHexString();
+
+            request(app)
+                .get(`/messages/${hexId}`)
+                .expect(404)
+                .end(done);
+        });
+
+        it('should return 404 if non-object ids', (done) => {
+            request(app)
+                .get('/messages/12345')
+                .expect(404)
                 .end(done);
         });
     });
