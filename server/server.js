@@ -8,6 +8,7 @@ const _ = require('lodash');
 const { mongoose } = require('./db/mongoose');
 const { User } = require('./models/user');
 const { Message } = require('./models/message');
+const {authenticate} = require('./middleware/authenticate');
 const fs = require('fs');
 
 const port = process.env.PORT || 3000;
@@ -45,6 +46,10 @@ app.post('/users', (req, res) => {
     }).catch((e) => {
         res.status(400).send(e);
     })
+});
+
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
 });
 
 // fulfillment webhook from dialogFlow
