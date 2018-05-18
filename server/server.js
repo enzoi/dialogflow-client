@@ -52,6 +52,34 @@ app.get('/users/me', authenticate, (req, res) => {
     res.send(req.user);
 });
 
+app.post('/messages', (req, res) => {
+    var body = _.pick(req.body, ['text', 'isSender']);
+    var message = new Message(body);
+
+    message.save().then((message) => {
+        res.send(message);
+    }).catch((e) => {
+        res.status(400).send(e);
+    })
+});
+
+app.get('/messages/:id', (req, res) => {
+    var id = req.params.id;
+
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send();
+    }
+
+    Message.findById(id).then((message) => {
+        if (!message) {
+            return res.status(404).send(); 
+        }
+        res.send({message});
+    }).catch((e) => {
+        res.status(400).send();
+    });
+});
+
 // fulfillment webhook from dialogFlow
 app.post('/action', (req, res) => {
     // receive query from dialogFlow for fulfillment

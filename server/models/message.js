@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 var messageSchema = new mongoose.Schema({
-    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     text: { 
         type: String,
         required: true,
@@ -14,7 +13,7 @@ var messageSchema = new mongoose.Schema({
     },
     created_at: {
         type: Number,
-        default: Date()
+        default: new Date()
     }
   });
   
