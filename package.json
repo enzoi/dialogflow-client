@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server/server.js",
     "test": "mocha server/**/*.test.js",
     "test-watch": "nodemon --exec \"npm test\""
   },
-  "author": "",
+  "engines": {
+    "node": "8.11.1"
+  },
+  "author": "Yeontae Kim",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
