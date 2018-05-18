@@ -63,6 +63,14 @@ app.post('/messages', (req, res) => {
     })
 });
 
+app.get('/messages', (req, res) => {
+    Message.find().then((messages) => {
+        res.send({messages});
+    }, (e) => {
+        res.status(400).send(e);
+    })
+});
+
 app.get('/messages/:id', (req, res) => {
     var id = req.params.id;
 
