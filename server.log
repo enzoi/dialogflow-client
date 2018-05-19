@@ -469,3 +469,6 @@ Fri May 18 2018 22:33:06 GMT-0700 (PDT): POST /users
 Fri May 18 2018 22:33:07 GMT-0700 (PDT): POST /users
 Fri May 18 2018 22:33:07 GMT-0700 (PDT): POST /users/login
 Fri May 18 2018 22:33:07 GMT-0700 (PDT): POST /users/login
+Fri May 18 2018 22:48:49 GMT-0700 (PDT): POST /users
+Fri May 18 2018 22:49:52 GMT-0700 (PDT): DELETE /users/me/token
+Fri May 18 2018 22:52:33 GMT-0700 (PDT): DELETE /users/me/token
