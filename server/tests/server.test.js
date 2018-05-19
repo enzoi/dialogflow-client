@@ -4,22 +4,10 @@ const {ObjectID} = require('mongodb');
 
 const {app} = require('../server');
 const {Message} = require('../models/message');
+const {messages, populateMessages, users, populateUsers} = require('./seed/seed');
 
-const messages = [{
-    _id: new ObjectID(),
-    text: 'First test message',
-    isSender: true
-}, {
-    _id: new ObjectID(),
-    text: 'Second test message',
-    isSender: false
-}]
-
-beforeEach((done) => {
-    Message.remove({}).then(() => {
-        return Message.insertMany(messages);
-    }).then(() => done());
-});
+beforeEach(populateUsers);
+beforeEach(populateMessages);
 
 describe('Server', () => {
     describe('GET /', () => {
